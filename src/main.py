@@ -5,7 +5,6 @@ class Product:
     description: str
     price: float
     quantity: int
-    product_count: int = 0
 
     def __init__(self, name, description, price=None, quantity=None):
         """Инициализация класса"""
@@ -13,7 +12,6 @@ class Product:
         self.description = description
         self.price = price if price else 0
         self.quantity = quantity if quantity else 0
-        Product.product_count += 1
 
 
 class Category:
@@ -23,6 +21,7 @@ class Category:
     description: str
     products: list
     category_count: int = 0
+    product_count: int
 
     def __init__(self, name, description, products=None):
         """Инициализация класса"""
@@ -31,6 +30,7 @@ class Category:
         self.description = description
         self.products = products if products is not None else []
         Category.category_count += 1
+        Category.product_count = len(products)
 
 
 if __name__ == "__main__":
@@ -62,11 +62,12 @@ if __name__ == "__main__":
     print(category1.name == "Смартфоны")
     print(category1.description)
     print(len(category1.products))
-    print(Category.category_count)
-    print(Product.product_count)
+    print(category1.category_count)
+    print(category1.product_count)
 
     product4 = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
-    category2 = Category("Телевизоры",
+    category2 = Category(
+        "Телевизоры",
         "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
         [product4],
     )
@@ -77,4 +78,4 @@ if __name__ == "__main__":
     print(category2.products)
 
     print(Category.category_count)
-    print(Product.product_count)
+    print(Category.product_count)
