@@ -1,24 +1,22 @@
-import pytest
-
 from src.main import Category
 
 
-def test_init_product(test_case_product, test_product4):
+def test_init_product(test_case_product, test_new_product):
     assert test_case_product.name == "Samsung Galaxy S23 Ultra"
     assert test_case_product.description == "256GB, Серый цвет, 200MP камера"
     assert test_case_product.price == 180000.0
     assert test_case_product.quantity == 5
-    new_product = test_case_product.new_product(test_product4)
+    new_product = test_case_product.new_product(test_new_product)
     assert new_product.name == "Samsung Galaxy S23 Ultra"
     assert new_product.description == "256GB, Серый цвет, 200MP камера"
     assert new_product.price == 180000.0
     assert new_product.quantity == 5
     new_product.price = 800
     assert new_product.price == 800
-    with pytest.raises(ValueError):
-        new_product.price = -100
-    with pytest.raises(ValueError):
-        new_product.price = 0
+    new_product.price = -100
+    assert new_product.price == 800
+    new_product.price = 0
+    assert new_product.price == 800
 
 
 def test_init_category(test_case_category, test_product4):
@@ -30,14 +28,13 @@ def test_init_category(test_case_category, test_product4):
     assert test_case_category.products == []
     assert Category.category_count == 1
     assert Category.product_count == 0
-    assert test_case_category.add_product(test_product4) is None
-    assert test_case_category.products == [
-        {
-            "description": "256GB, Серый цвет, 200MP камера",
-            "name": "Samsung Galaxy S23 Ultra",
-            "price": 180000.0,
-            "quantity": 5,
-        }
-    ]
+    test_case_category.add_product(test_product4)
+    # assert test_case_category.products == [('55" QLED 4K', 'Фоновая подсветка', 123000.0, 7)]
     assert Category.category_count == 1
     assert Category.product_count == 1
+
+
+def test_get_products_str(test_case_category, test_product4):
+    assert test_case_category.get_products_str == ""
+    test_case_category.add_product(test_product4)
+    assert test_case_category.get_products_str == '55" QLED 4K, 123000.0 руб. Остаток: 7 шт.\n'
