@@ -1,9 +1,7 @@
 from typing import Any
 
+from src.main import Category, Product
 from src.utils import load_products_json
-
-from src.main import Product
-from src.main import Category
 
 
 def get_information_product(list_product: list[dict[str, Any]]) -> list:
