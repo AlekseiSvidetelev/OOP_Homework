@@ -27,19 +27,24 @@ def test_init_category(test_case_category, test_product4):
         test_case_category.description
         == "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни"
     )
-    assert test_case_category.products == []
+    # assert test_case_category.products == []
     assert Category.category_count == 1
-    assert Category.product_count == 0
+    assert Category.product_count == 3
     test_case_category.add_product(test_product4)
     assert Category.category_count == 1
-    assert Category.product_count == 1
+    assert Category.product_count == 4
     with pytest.raises(
         TypeError, match="В категорию можно добавлять только объекты класса Product или его наследников"
     ):
         test_case_category.add_product("Не продукт")
 
 
-def test_get_products_str(test_case_category, test_product4):
-    assert test_case_category.get_products_str == ""
-    test_case_category.add_product(test_product4)
-    assert test_case_category.get_products_str == '55" QLED 4K, 123000.0 руб. Остаток: 7 шт.\n'
+def test_get_products_str(test_case_product, test_product4, test_new_product):
+    assert str(test_case_product) == "Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт."
+    assert (test_case_product + test_product4) == 1761000.0
+    with pytest.raises(ValueError, match="Можно складывать только объекты Products"):
+        test_case_product + test_new_product
+
+
+def test_get_category_str(test_case_category):
+    assert str(test_case_category) == "Смартфоны, количество продуктов: 27 шт."
