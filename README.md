@@ -56,4 +56,5 @@ test_init_category(test_case_category):
 Проверяет корректность инициализации объекта Category.
 
 
+
 Установка и запуск
