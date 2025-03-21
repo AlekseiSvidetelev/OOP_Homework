@@ -1,6 +1,6 @@
 import pytest
 
-from src.main import Category, Product, Smartphone, LawnGrass
+from src.main import Category, LawnGrass, Product, Smartphone
 
 
 @pytest.fixture
@@ -66,5 +66,3 @@ def test_smartphone():
 @pytest.fixture
 def test_lawngrass():
     return LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
-
-#
