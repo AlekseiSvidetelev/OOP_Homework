@@ -37,9 +37,7 @@ class Product(MixinLog, BaseProduct):
     price: float
     quantity: int
 
-    def __init__(
-        self, name: str, description: str, price: float, quantity: int
-    ) -> None:
+    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         """Инициализация класса"""
         self.__price = price if price else 0
         super().__init__(name, description, price, quantity if quantity else 0)
@@ -119,8 +117,8 @@ class Category:
         self.products.append(product)
         Category.product_count += 1
 
-    def middle_price(self):
-        """ Подсчет средней стоимости всех товаров в категории """
+    def middle_price(self) -> Any:
+        """Подсчет средней стоимости всех товаров в категории"""
         try:
             if not self.category_count or self.product_count == 0:
                 raise ValueError("Список продуктов пуст")
@@ -130,7 +128,6 @@ class Category:
                 return round(sum_price / sum_quantity, 2)
         except Exception as e:
             print(f"{e}")
-
 
 
 class Smartphone(Product, MixinLog):
@@ -189,7 +186,8 @@ class LawnGrass(Product, MixinLog):
         self.germination_period = germination_period
         self.color = color
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
 
     # homework_17_1
 
@@ -197,7 +195,8 @@ if __name__ == '__main__':
         product_invalid = Product("Бракованный товар", "Неверное количество", 1000.0, 0)
     except ValueError as e:
         print(
-            "Возникла ошибка ValueError прерывающая работу программы при попытке добавить продукт с нулевым количеством")
+            "Возникла ошибка ValueError прерывающая работу программы при попытке добавить продукт с нулевым количеством"
+        )
     else:
         print("Не возникла ошибка ValueError при попытке добавить продукт с нулевым количеством")
 

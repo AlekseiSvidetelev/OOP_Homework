@@ -86,19 +86,19 @@ def test_repr_product(test_product4, test_smartphone):
 
 
 def test_middle_price(test_case_category):
-    """ Тест подсчета стоимости средней стоимости всех проваров в категории """
+    """Тест подсчета стоимости средней стоимости всех проваров в категории"""
     assert test_case_category.middle_price() == 111629.63
 
 
 def test_exception_middle_price(capsys, test_category_empty):
-    """ Тестирование обработки исключения при добавлении категории с пустыми продуктами """
+    """Тестирование обработки исключения при добавлении категории с пустыми продуктами"""
     Category.category_count = 0
     test_category_empty.middle_price()
     message = capsys.readouterr()
     assert message.out.strip().split("\n")[-1] == "Список продуктов пуст"
 
-def test_quantity_is_zero():
-    """ Тестирование добавления продукта с нулевым количеством """
-    with pytest.raises(ValueError) as e_info:
-        Product("Iphone 15", "512GB, Gray space", 210000.0, 0)
 
+def test_quantity_is_zero():
+    """Тестирование добавления продукта с нулевым количеством"""
+    with pytest.raises(ValueError):
+        Product("Iphone 15", "512GB, Gray space", 210000.0, 0)

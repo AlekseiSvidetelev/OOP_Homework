@@ -68,6 +68,7 @@ def test_smartphone():
 def test_lawngrass():
     return LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
 
+
 @pytest.fixture
 def test_category_empty():
     return Category("Пустая категория", "Категория без продуктов", [])
