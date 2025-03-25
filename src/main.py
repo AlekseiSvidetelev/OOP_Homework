@@ -128,6 +128,7 @@ class Category:
                 return round(sum_price / sum_quantity, 2)
         except Exception as e:
             print(f"{e}")
+            return 0
 
 
 class Smartphone(Product, MixinLog):
