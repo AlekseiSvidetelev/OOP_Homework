@@ -25,6 +25,7 @@ def test_new_product():
 
 @pytest.fixture
 def test_case_category():
+    Category.category_count = 0
     return Category(
         "Смартфоны",
         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
@@ -66,3 +67,8 @@ def test_smartphone():
 @pytest.fixture
 def test_lawngrass():
     return LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
+
+
+@pytest.fixture
+def test_category_empty():
+    return Category("Пустая категория", "Категория без продуктов", [])
